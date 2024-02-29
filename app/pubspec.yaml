@@ -1,0 +1,27 @@
+name: flutter_modularized_di
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cross_cutting_concerns:
+    path: ../packages/cross_cutting_concerns
+  domain:
+    path: ../packages/domain
+  data:
+    path: ../packages/data
+  presentation:
+    path: ../packages/presentation
+  provider: ^6.1.2
+  get_it: ^7.6.7
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,35 @@
+name: flutter_modularized_di
+
+packages:
+  - app
+  - packages/**
+
+ide:
+  intellij:
+    enabled: false
+
+command:
+  clean:
+    hooks:
+      post: melos exec rm -rf ./build ./android/.gradle ./ios/.symlinks ./ios/Pods ./ios/Podfile.lock ./.dart_tool ./pubspec.lock
+
+  bootstrap:
+    environment:
+      sdk: ">=3.0.0 <4.0.0"
+      flutter: ">=3.16.0"
+
+    dependencies:
+      flutter_bloc: ^8.1.4
+      shared_preferences: ^2.2.2
+      provider: ^6.1.2
+
+    dev_dependencies:
+      flutter_lints: ^3.0.0
+      lints: ^3.0.0
+
+scripts:
+  analyze: melos exec dart analyze .
+
+  format: melos exec dart format .
+
+  check_formatting: melos exec dart format . --set-exit-if-changed
