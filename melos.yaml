@@ -30,6 +30,8 @@ command:
 scripts:
   analyze: melos exec dart analyze .
 
-  format: melos exec dart format .
+  analyze_diff: melos exec --diff=origin/main...HEAD --include-dependents dart analyze .
 
-  check_formatting: melos exec dart format . --set-exit-if-changed
+  format_check_diff: melos exec --diff=origin/main...HEAD --include-dependents dart format . --set-exit-if-changed
+
+  format_check: melos exec dart format . --set-exit-if-changed
