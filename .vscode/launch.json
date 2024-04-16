@@ -21,5 +21,21 @@
             "type": "dart",
             "flutterMode": "release"
         },
+        {
+            "name": "update goldens",
+            "type": "dart",
+            "request": "launch",
+            "args": [
+                "--update-goldens"
+            ],
+            "templateFor": "test",
+            "codeLens": {
+                "for": [
+                    "run-test",
+                    "run-test-file"
+                ],
+                "title": "Update goldens"
+            }
+        }
     ]
 }

@@ -30,8 +30,39 @@ command:
 scripts:
   analyze: melos exec dart analyze .
 
-  analyze_diff: melos exec --diff=origin/main...HEAD --include-dependents dart analyze .
+  analyze_diff:
+    run: melos exec --diff=origin/main...HEAD --include-dependents \
+      dart analyze .
 
-  format_check_diff: melos exec --diff=origin/main...HEAD --include-dependents dart format . --set-exit-if-changed
+  format_check_diff:
+    run: melos exec --diff=origin/main...HEAD --include-dependents \
+      dart format . --set-exit-if-changed
 
   format_check: melos exec dart format . --set-exit-if-changed
+
+  test_golden_package:
+    run: melos exec flutter test --tags golden --dart-define=CI=true
+    packageFilters:
+      dirExists:
+        - test
+      dependsOn:
+        - alchemist
+
+  test_golden_package_diff:
+    run: melos exec --diff=origin/main...HEAD --include-dependents \
+      flutter test --tags golden --dart-define=CI=true
+    packageFilters:
+      dirExists:
+        - test
+      dependsOn:
+        - alchemist
+
+  test_golden: melos run test_golden_package --no-select
+
+  test_golden_diff: melos run test_golden_package_diff --no-select
+
+  update_goldens:
+    run: melos exec flutter test --update-goldens
+    packageFilters:
+      dependsOn:
+        - alchemist

@@ -28,10 +28,13 @@ jobs:
         uses: bluefireteam/melos-action@v3
 
       - name: Run analyzer
-        run: melos analyze
+        run: melos run analyze
 
       - name: Check formatting of Dart files
-        run: melos format_check
+        run: melos run format_check
+
+      - name: Run golden tests
+        run: melos run test_golden
 
   ci_on_diff:
     timeout-minutes: 10
@@ -52,10 +55,13 @@ jobs:
         uses: bluefireteam/melos-action@v3
 
       - name: Run analyzer with Git Diff
-        run: melos analyze_diff
+        run: melos run analyze_diff
 
       - name: Check formatting of Dart files with Git Diff
-        run: melos format_check_diff
+        run: melos run format_check_diff
+
+      - name: Run golden tests with Git Diff
+        run: melos run test_golden_diff
 
   ci_on_diff_alternative:
     timeout-minutes: 10
@@ -84,8 +90,16 @@ jobs:
             echo "MELOS_PACKAGES=$(echo "$changeAffectedPackages" | paste -sd ',' -)" >> $GITHUB_ENV
           fi
 
-      - name: Run analyzer
-        run: melos analyze
+      - name: Print MELOS_PACKAGES global scope
+        run: |
+          echo "The Melos global scope is: $MELOS_PACKAGES"
+          echo "It'll be used as a global filter for the remaining Melos scripts in the pipeline!"
 
-      - name: Check formatting of Dart files
-        run: melos format_check
+      - name: Run analyzer with Git Diff using MELOS_PACKAGES
+        run: melos run analyze
+
+      - name: Check formatting of Dart files with Git Diff using MELOS_PACKAGES
+        run: melos run format_check
+
+      - name: Run golden tests with Git Diff using MELOS_PACKAGES
+        run: melos run test_golden
