@@ -11,7 +11,7 @@ env:
   FLUTTER_VERSION: "3.19.5"
 
 jobs:
-  ci:
+  full_CI:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -36,34 +36,7 @@ jobs:
       - name: Run golden tests
         run: melos run test_golden
 
-  ci_on_diff:
-    timeout-minutes: 10
-    runs-on: ubuntu-latest
-    steps:
-      - name: Git Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{env.FLUTTER_MIN_VERSION}}
-          cache: true
-
-      - name: Set up Melos
-        uses: bluefireteam/melos-action@v3
-
-      - name: Run analyzer with Git Diff
-        run: melos run analyze_diff
-
-      - name: Check formatting of Dart files with Git Diff
-        run: melos run format_check_diff
-
-      - name: Run golden tests with Git Diff
-        run: melos run test_golden_diff
-
-  ci_on_diff_alternative:
+  selective_CI:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -103,3 +76,33 @@ jobs:
 
       - name: Run golden tests with Git Diff using MELOS_PACKAGES
         run: melos run test_golden
+
+  # This Melos filtering approach will not work as intended until the following
+  # feature is implemented https://github.com/invertase/melos/pull/702.
+  selective_CI_alternative:
+    if: false
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_MIN_VERSION}}
+          cache: true
+
+      - name: Set up Melos
+        uses: bluefireteam/melos-action@v3
+
+      - name: Run analyzer with Git Diff
+        run: melos run analyze_diff
+
+      - name: Check formatting of Dart files with Git Diff
+        run: melos run format_check_diff
+
+      - name: Run golden tests with Git Diff
+        run: melos run test_golden_diff
