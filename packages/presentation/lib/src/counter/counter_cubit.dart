@@ -5,9 +5,7 @@ import 'package:presentation/src/counter/counter_state.dart';
 class CounterCubit extends Cubit<CounterState> {
   CounterCubit(CounterRepository counterRepository)
       : _counterRepository = counterRepository,
-        super(const CounterLoading()) {
-    _initialize();
-  }
+        super(const CounterLoading());
 
   final CounterRepository _counterRepository;
 
@@ -25,7 +23,7 @@ class CounterCubit extends Cubit<CounterState> {
     }
   }
 
-  void _initialize() async {
+  Future<void> initialize() async {
     final counterEntity = await _counterRepository.getCounter();
     emit(CounterSuccess(counterEntity.value));
   }
