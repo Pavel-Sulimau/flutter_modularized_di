@@ -33,6 +33,9 @@ jobs:
       - name: Check formatting of Dart files
         run: melos run format_check
 
+      - name: Run unit tests
+        run: melos run test_unit
+
       - name: Run golden tests
         run: melos run test_golden
 
@@ -74,6 +77,9 @@ jobs:
       - name: Check formatting of Dart files with Git Diff using MELOS_PACKAGES
         run: melos run format_check
 
+      - name: Run unit tests with Git Diff using MELOS_PACKAGES
+        run: melos run test_unit
+
       - name: Run golden tests with Git Diff using MELOS_PACKAGES
         run: melos run test_golden
 
@@ -103,6 +109,9 @@ jobs:
 
       - name: Check formatting of Dart files with Git Diff
         run: melos run format_check_diff
+
+      - name: Run unit tests with Git Diff
+        run: melos run test_unit_diff
 
       - name: Run golden tests with Git Diff
         run: melos run test_golden_diff

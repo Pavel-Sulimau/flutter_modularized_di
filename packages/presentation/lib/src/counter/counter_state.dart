@@ -1,9 +1,14 @@
-sealed class CounterState {
+import 'package:equatable/equatable.dart';
+
+sealed class CounterState extends Equatable {
   const CounterState();
 }
 
 final class CounterLoading extends CounterState {
   const CounterLoading() : super();
+
+  @override
+  List<Object?> get props => [];
 }
 
 final class CounterSuccess extends CounterState {
@@ -12,4 +17,7 @@ final class CounterSuccess extends CounterState {
   final int value;
 
   CounterSuccess copyWith(int newValue) => CounterSuccess(newValue);
+
+  @override
+  List<Object?> get props => [value];
 }

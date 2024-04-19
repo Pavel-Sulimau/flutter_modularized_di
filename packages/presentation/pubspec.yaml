@@ -11,6 +11,7 @@ dependencies:
     path: ../cross_cutting_concerns
   domain:
     path: ../domain
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4

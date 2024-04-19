@@ -17,6 +17,8 @@ void main() {
       CounterCubit fakeCounterCubit = FakeCounterCubit();
       when(() => fakeCounterCubit.state)
           .thenAnswer((_) => const CounterSuccess(42));
+      when(() => fakeCounterCubit.initialize())
+          .thenAnswer((_) => Future.value());
       when(() => fakeDI.get<CounterCubit>()).thenReturn(fakeCounterCubit);
     });
 

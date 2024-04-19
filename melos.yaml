@@ -27,6 +27,8 @@ command:
       flutter_lints: ^3.0.0
       lints: ^3.0.0
 
+# This _diff scripts belows will not work as intended until the following
+# feature is implemented https://github.com/invertase/melos/pull/702.
 scripts:
   analyze: melos exec dart analyze .
 
@@ -39,6 +41,23 @@ scripts:
       dart format . --set-exit-if-changed
 
   format_check: melos exec dart format . --set-exit-if-changed
+
+  test_unit_package:
+    run: melos exec flutter test --exclude-tags golden
+    packageFilters:
+      dirExists:
+        - test
+
+  test_unit_package_diff:
+    run: melos exec --diff=origin/main...HEAD --include-dependents \
+      flutter test --exclude-tags golden
+    packageFilters:
+      dirExists:
+        - test
+
+  test_unit: melos run test_unit_package --no-select
+
+  test_unit_diff: melos run test_unit_package_diff --no-select
 
   test_golden_package:
     run: melos exec flutter test --tags golden --dart-define=CI=true
