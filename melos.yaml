@@ -18,7 +18,7 @@ command:
   bootstrap:
     environment:
       sdk: ">=3.0.0 <4.0.0"
-      flutter: ">=3.16.0"
+      flutter: ">=3.22.2"
 
     dependencies:
       flutter_bloc: ^8.1.4
@@ -26,8 +26,8 @@ command:
       provider: ^6.1.2
 
     dev_dependencies:
-      flutter_lints: ^3.0.0
-      lints: ^3.0.0
+      flutter_lints: ^4.0.0
+      lints: ^4.0.0
 
 # This _diff scripts belows will not work as intended until the following
 # feature is implemented https://github.com/invertase/melos/pull/702.
