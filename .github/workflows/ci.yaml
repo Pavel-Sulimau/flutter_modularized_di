@@ -25,6 +25,9 @@ jobs:
           flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           cache: true
 
+      - name: Override Fluter SDK Path for Melos
+        run: echo "MELOS_SDK_PATH=${{ env.FLUTTER_ROOT }}" >> $GITHUB_ENV
+
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
 
@@ -58,6 +61,9 @@ jobs:
         with:
           flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           cache: true
+
+      - name: Override Fluter SDK Path for Melos
+        run: echo "MELOS_SDK_PATH=${{ env.FLUTTER_ROOT }}" >> $GITHUB_ENV
 
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
@@ -109,6 +115,9 @@ jobs:
         with:
           flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           cache: true
+
+      - name: Override Fluter SDK Path for Melos
+        run: echo "MELOS_SDK_PATH=${{ env.FLUTTER_ROOT }}" >> $GITHUB_ENV
 
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
