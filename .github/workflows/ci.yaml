@@ -31,6 +31,17 @@ jobs:
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
 
+      - name: Check for cyclic dependencies
+        run: |
+          output=$(melos list --cycles)
+          echo "$output"
+
+          if [[ $output == *"No cycles in dependencies found"* ]]; then
+            exit 0
+          else
+            exit 1
+          fi
+
       - name: Run analyzer
         run: melos run analyze
 
@@ -67,6 +78,17 @@ jobs:
 
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
+
+      - name: Check for cyclic dependencies
+        run: |
+          output=$(melos list --cycles)
+          echo "$output"
+
+          if [[ $output == *"No cycles in dependencies found"* ]]; then
+            exit 0
+          else
+            exit 1
+          fi
 
       - name: Set MELOS_PACKAGES filter with packages names that are affected by the Git Diff
         run: |
@@ -121,6 +143,17 @@ jobs:
 
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
+
+      - name: Check for cyclic dependencies
+        run: |
+          output=$(melos list --cycles)
+          echo "$output"
+
+          if [[ $output == *"No cycles in dependencies found"* ]]; then
+            exit 0
+          else
+            exit 1
+          fi
 
       - name: Run analyzer with Git Diff
         run: melos run analyze_diff
