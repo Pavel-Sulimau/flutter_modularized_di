@@ -33,8 +33,10 @@ jobs:
 
       - name: Check for cyclic dependencies
         run: |
+          set +e
           output=$(melos list --cycles)
           echo "$output"
+          set -e
 
           if [[ $output == *"No cycles in dependencies found"* ]]; then
             exit 0
@@ -81,8 +83,10 @@ jobs:
 
       - name: Check for cyclic dependencies
         run: |
+          set +e
           output=$(melos list --cycles)
           echo "$output"
+          set -e
 
           if [[ $output == *"No cycles in dependencies found"* ]]; then
             exit 0
@@ -146,8 +150,10 @@ jobs:
 
       - name: Check for cyclic dependencies
         run: |
+          set +e
           output=$(melos list --cycles)
           echo "$output"
+          set -e
 
           if [[ $output == *"No cycles in dependencies found"* ]]; then
             exit 0
