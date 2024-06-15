@@ -1,5 +1,7 @@
 name: flutter_modularized_di
 
+sdkPath: .fvm/flutter_sdk
+
 packages:
   - app
   - packages/**

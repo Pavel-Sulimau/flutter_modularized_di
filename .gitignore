@@ -44,3 +44,6 @@ pubspec_overrides.yaml
 **/test/**/goldens/**/*.*
 **/test/**/failures/**/*.*
 !**/test/**/goldens/ci/*.*
+
+# FVM Version Cache
+.fvm/

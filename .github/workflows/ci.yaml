@@ -7,9 +7,6 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
 
-env:
-  FLUTTER_VERSION: "3.19.5"
-
 jobs:
   full_CI:
     timeout-minutes: 10
@@ -18,11 +15,18 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@v4
 
+      - name: Read FVM config
+        uses: kuhnroyal/flutter-fvm-config-action@v2
+        id: fvm-config-action
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{env.FLUTTER_MIN_VERSION}}
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           cache: true
+
+      - name: Override Fluter SDK Path for Melos
+        run: echo "MELOS_SDK_PATH=${{ env.FLUTTER_ROOT }}" >> $GITHUB_ENV
 
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
@@ -48,11 +52,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Read FVM config
+        uses: kuhnroyal/flutter-fvm-config-action@v2
+        id: fvm-config-action
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{env.FLUTTER_MIN_VERSION}}
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           cache: true
+
+      - name: Override Fluter SDK Path for Melos
+        run: echo "MELOS_SDK_PATH=${{ env.FLUTTER_ROOT }}" >> $GITHUB_ENV
 
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
@@ -95,11 +106,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Read FVM config
+        uses: kuhnroyal/flutter-fvm-config-action@v2
+        id: fvm-config-action
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{env.FLUTTER_MIN_VERSION}}
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           cache: true
+
+      - name: Override Fluter SDK Path for Melos
+        run: echo "MELOS_SDK_PATH=${{ env.FLUTTER_ROOT }}" >> $GITHUB_ENV
 
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
