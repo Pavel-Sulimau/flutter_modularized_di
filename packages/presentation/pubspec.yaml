@@ -20,7 +20,7 @@ dependencies:
 dev_dependencies:
   alchemist: ^0.7.0
   bloc_test: ^9.1.7
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.3
