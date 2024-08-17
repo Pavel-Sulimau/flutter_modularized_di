@@ -44,8 +44,8 @@ scripts:
 
   format_check: melos exec dart format . --set-exit-if-changed
 
-  test_unit_package:
-    run: melos exec flutter test --exclude-tags golden
+  test_unit_with_coverage_package:
+    run: melos exec MELOS_ROOT_PATH/scripts/test_with_coverage.sh --exclude-tags golden
     packageFilters:
       dirExists:
         - test
@@ -57,7 +57,7 @@ scripts:
       dirExists:
         - test
 
-  test_unit: melos run test_unit_package --no-select
+  test_unit_with_coverage: melos run test_unit_with_coverage_package --no-select
 
   test_unit_diff: melos run test_unit_package_diff --no-select
 
