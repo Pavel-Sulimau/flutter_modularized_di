@@ -31,6 +31,9 @@ jobs:
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
 
+      - name: Install tools
+        run: ./scripts/install_tools.sh
+
       - name: Check for cyclic dependencies
         run: |
           set +e
@@ -50,8 +53,8 @@ jobs:
       - name: Check formatting of Dart files
         run: melos run format_check
 
-      - name: Run unit tests
-        run: melos run test_unit
+      - name: Run unit tests with coverage check
+        run: melos run test_unit_with_coverage
 
       - name: Run golden tests
         run: melos run test_golden
@@ -80,6 +83,9 @@ jobs:
 
       - name: Set up Melos
         uses: bluefireteam/melos-action@v3
+
+      - name: Install tools
+        run: ./scripts/install_tools.sh
 
       - name: Check for cyclic dependencies
         run: |
@@ -115,7 +121,7 @@ jobs:
         run: melos run format_check
 
       - name: Run unit tests with Git Diff using MELOS_PACKAGES
-        run: melos run test_unit
+        run: melos run test_unit_with_coverage
 
       - name: Run golden tests with Git Diff using MELOS_PACKAGES
         run: melos run test_golden
